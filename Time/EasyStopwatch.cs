@@ -28,7 +28,7 @@ namespace EsthaHelpers.Time
             }
             catch (Exception e)
             {
-                Debug.Write(System.String.Format(
+                System.Diagnostics.Debug.Write(System.String.Format(
                     "\"" + whichTitle + "\" stopwatch: " +
                     "error in EasyStopwatch.start" +
                     "\n"
@@ -42,7 +42,7 @@ namespace EsthaHelpers.Time
             {
                 if (easyStopwatchDictionary.ContainsKey(whichTitle))
                 {
-                    Debug.Write(System.String.Format(
+                    System.Diagnostics.Debug.Write(System.String.Format(
                             "\"" + whichTitle + "\" stopwatch: " +
                             easyStopwatchDictionary[whichTitle].Elapsed.ToString() +
                             "\n"
@@ -52,7 +52,7 @@ namespace EsthaHelpers.Time
             }
             catch (Exception e)
             {
-                Debug.Write(System.String.Format(
+                System.Diagnostics.Debug.Write(System.String.Format(
                         "\"" + whichTitle + "\" stopwatch: " +
                         "not present in the pool; EasyStopwatch.inter" +
                         "\n"
@@ -68,7 +68,7 @@ namespace EsthaHelpers.Time
                 if (easyStopwatchDictionary.ContainsKey(whichTitle))
                 {
                     easyStopwatchDictionary[whichTitle].Stop();
-                    Debug.Write(System.String.Format(
+                    System.Diagnostics.Debug.Write(System.String.Format(
                             "\"" + whichTitle + "\" stopwatch: " +
                             easyStopwatchDictionary[whichTitle].Elapsed.ToString() +
                             "\n"
@@ -80,7 +80,7 @@ namespace EsthaHelpers.Time
             }
             catch (Exception e)
             {
-                Debug.Write(System.String.Format(
+                System.Diagnostics.Debug.Write(System.String.Format(
                         "\"" + whichTitle + "\" stopwatch: " +
                         "not present in the pool; EasyStopwatch.end__" +
                         "\n"
