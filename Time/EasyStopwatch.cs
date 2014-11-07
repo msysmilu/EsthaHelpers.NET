@@ -28,7 +28,11 @@ namespace EsthaHelpers.Time
             }
             catch (Exception e)
             {
-                Debug.Write("EsthaHelpers.Time Exception: " + e.ToString());
+                Debug.Write(System.String.Format(
+                    "\"" + whichTitle + "\" stopwatch: " +
+                    "error in EasyStopwatch.start" +
+                    "\n"
+                ));
             }
         }
 
@@ -48,7 +52,11 @@ namespace EsthaHelpers.Time
             }
             catch (Exception e)
             {
-                Debug.Write("EsthaHelpers.Time Exception: " + e.ToString());
+                Debug.Write(System.String.Format(
+                        "\"" + whichTitle + "\" stopwatch: " +
+                        "not present in the pool; EasyStopwatch.inter" +
+                        "\n"
+                ));
             }
             return 0;
         }
@@ -72,7 +80,11 @@ namespace EsthaHelpers.Time
             }
             catch (Exception e)
             {
-                Debug.Write("EsthaHelpers.Time Exception: " + e.ToString());
+                Debug.Write(System.String.Format(
+                        "\"" + whichTitle + "\" stopwatch: " +
+                        "not present in the pool; EasyStopwatch.end__" +
+                        "\n"
+                ));
             }
             return 0;
         }

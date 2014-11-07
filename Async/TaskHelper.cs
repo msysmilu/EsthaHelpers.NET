@@ -10,7 +10,7 @@ namespace EsthaHelpers.Async
     /// Class for help with running async tasks in a sync manner.
     /// </summary>
     public static class TaskHelper
-    {
+    { 
         public static void RunTaskSynchronously(this Task t)
         {
             var task = Task.Run(async () => await t);
@@ -19,10 +19,20 @@ namespace EsthaHelpers.Async
 
         public static T RunTaskSynchronously<T>(this Task<T> t)
         {
-            T res = default(T);
-            var task = Task.Run(async () => res = await t);
-            task.Wait();
-            return res;
+            try
+            {
+                T res = default(T);
+                var task = Task.Run(async () => res = await t);
+                task.Wait();
+                return res;
+            }
+            catch (Exception e)
+            {
+                System.Exception sysEx = new System.Exception("RunTaskSynchronously exception.", e);
+                throw sysEx;
+            } 
+            
+            
         }
     }
 }
