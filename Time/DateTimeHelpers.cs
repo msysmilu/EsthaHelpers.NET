@@ -110,9 +110,12 @@ namespace EsthaHelpers.Time
             return (Int32)(dt.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
         }
 
-        public static DateTime getEpochDatetime()
+        public static DateTime getEpochDatetime
         {
-            return new DateTime(1970, 1, 1, 0, 0, 0);
+            get
+            {
+                return new DateTime(1970, 1, 1, 0, 0, 0);
+            }
         }
 
     }
