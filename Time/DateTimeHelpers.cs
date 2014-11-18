@@ -6,7 +6,7 @@ using System.Web;
 
 namespace EsthaHelpers.Time
 {
-    public class DateTimeHelpers
+    public static class DateTimeHelpers
     {
         private static string epoch_start_yyyyMMddHHmmss = "19700101000000";
         private static string epoch_start_yyyyMMdd = "19700101";
@@ -118,5 +118,47 @@ namespace EsthaHelpers.Time
             }
         }
 
+        // ============================================================================================
+
+        public enum DateTimeResolution
+        {
+            Year, Month, Day, Hour, Minute, Second, Millisecond, Tick
+        }
+
+        public static DateTime Truncate(this DateTime self, DateTimeResolution resolution = DateTimeResolution.Second)
+        {
+            switch (resolution)
+            {
+                case DateTimeResolution.Year:
+                    return new DateTime(self.Year, 1, 1, 0, 0, 0, 0, self.Kind);
+                case DateTimeResolution.Month:
+                    return new DateTime(self.Year, self.Month, 1, 0, 0, 0, self.Kind);
+                case DateTimeResolution.Day:
+                    return new DateTime(self.Year, self.Month, self.Day, 0, 0, 0, self.Kind);
+                case DateTimeResolution.Hour:
+                    return self.AddTicks(-(self.Ticks % TimeSpan.TicksPerHour));
+                case DateTimeResolution.Minute:
+                    return self.AddTicks(-(self.Ticks % TimeSpan.TicksPerMinute));
+                case DateTimeResolution.Second:
+                    return self.AddTicks(-(self.Ticks % TimeSpan.TicksPerSecond));
+                case DateTimeResolution.Millisecond:
+                    return self.AddTicks(-(self.Ticks % TimeSpan.TicksPerMillisecond));
+                case DateTimeResolution.Tick:
+                    return self.AddTicks(0);
+                default:
+                    throw new ArgumentException("unrecognized resolution", "resolution");
+            }
+        }
+
+        /// <summary>
+        /// Compares the two DateTimes within a second's accuracy.
+        /// </summary>
+        /// <returns> 1: t1>t2, 0: t1=t2, -1: t1<t2 </returns>
+        public static int compareToSecond(DateTime t1, DateTime t2)
+        {
+            t1 = Truncate(t1, DateTimeResolution.Second);
+            t2 = Truncate(t2, DateTimeResolution.Second);
+            return DateTime.Compare(t1, t2);
+        }
     }
 }
